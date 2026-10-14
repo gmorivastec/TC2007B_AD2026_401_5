@@ -1,8 +1,12 @@
 package mx.tec.nativeexploration
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -58,5 +62,38 @@ class MainActivity : AppCompatActivity() {
         // 2 ways to subscribe logic to a GUI event
         // 1 - programmatically through code
         // 2 - establishing a relationship through GUI with a function
+
+        button2.setOnClickListener {
+
+            // change activity
+            // in android we request a new activity, we don't order
+            // we need an object that contains the request
+            // the type of this object is intent
+
+            // 2 options when opening an activity:
+            // 1. new activity can be started with an explicit type
+            // 2. with an action we want to complete
+
+            var intent = Intent(this, ComposeActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    // option 2 for UI callback
+    // all UI callbacks must receive a view
+    fun sayHi(view : View)
+    {
+        // the view we receive is a reference to the widget that invoked the function
+
+        // let's make a toast!
+        // ANOTHER factory method
+        Toast.makeText(this, "HI MY FRIEND: ${textInput.text}", Toast.LENGTH_SHORT).show()
+
+        // logs and log levels
+        Log.i("LOGS", "INFO")
+        Log.d("LOGS", "DEBUG")
+        Log.w("LOGS", "WARNING")
+        Log.e("LOGS", "ERROR")
+        Log.wtf("LOGS", "WHAT A TERRIBLE FAILURE!")
     }
 }
